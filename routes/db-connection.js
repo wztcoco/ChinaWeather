@@ -5,7 +5,7 @@ var Sequelize = require('sequelize');
 var DatabaseInfo = {
     mysql: {
         development: {
-            database:'AndroidDB',
+            database:'python',
             username:'coco',
             password:'Wzt_759687679',
             host:'47.100.112.88',
