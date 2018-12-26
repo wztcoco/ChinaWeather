@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+    <script type="text/javascript" src="/javascripts/jquery.min.js" ></script>
+</head>
+<body>
+    <div>
+        <div>接口名：<button id="addShop" onclick="addShop()">addShop</button></div>
+        <div>ShopId:</div><input id = "ShopId">
+        <div>ShopName:</div><input id = "ShopName">
+        <div>ShopTypeName:</div><input id = "ShopTypeName">
+        <div>ShopIntro:</div><input id = "ShopIntro">
+        <div>ShopImage:</div><input id = "ShopImage">
+
+    </div>
+
+    <div>
+        <div>接口名：<button id="getShop" onclick="getShop()">getShop</button></div>
+
+    </div>
+
+    <div>result:</div>
+    <div id="resultObj"></div>
+    <div id="resultInf"></div>
+    <script>
+        var addShop = function(){
+            var shop_id = document.getElementById("ShopId").value;
+            var shop_name = document.getElementById("ShopName").value;
+            var shop_type_name = document.getElementById("ShopTypeName").value;
+            var shop_intro = document.getElementById("ShopIntro").value;
+            var shop_image = document.getElementById("ShopImage").value;
+            axios.post('/api',{
+                    "apicode":"addShop",
+                    "args":{
+                        "shop_id":shop_id,
+                        "shop_name":shop_name,
+                        "shop_type_name":shop_type_name,
+                        "shop_intro":shop_intro,
+                        "shop_image":shop_image
+
+                }
+
+            }).then(function (response) {
+                $("#resultObj").html(JSON.stringify(response.data.obj));
+                $("#resultInf").html(response.data.msg.prompt);
+
+            }).catch(function (error) {
+                    console.log(error);
+                });
+        };
+        var getShops = function(){
+            axios.post('/api',{
+                "apicode":"getShops",
+                "args":{
+                }
+
+            }).then(function (response) {
+                $("#resultObj").html(JSON.stringify(response.data.obj));
+                $("#resultInf").html(response.data.msg.prompt);
+
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }
+    </script>
+
+</body>
+</html>
