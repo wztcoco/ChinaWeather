@@ -1,71 +1,227 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
-    <script type="text/javascript" src="/js/jquery.min.js" ></script>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/lib/raphael-min.js"></script>
+    <script type="text/javascript" src="js/res/chinaMapConfig.js"></script>
+    <script type="text/javascript" src="js/res/worldMapConfig.js"></script>
+    <script type="text/javascript" src="js/map.js"></script>
+    <script src="http://cdn.hcharts.cn/highcharts/highcharts.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>China Weather</title>
 </head>
 <body>
-    <div>
-        <div>接口名：<button id="addShop" onclick="addShop()">addShop</button></div>
-        <div>ShopId:</div><input id = "ShopId">
-        <div>ShopName:</div><input id = "ShopName">
-        <div>ShopTypeName:</div><input id = "ShopTypeName">
-        <div>ShopIntro:</div><input id = "ShopIntro">
-        <div>ShopImage:</div><input id = "ShopImage">
+<div class="tab">
+    <div class="box">
+        <ul class="menus">
+            <li class="bg">map</li>
+            <li>tab2</li>
+            <li>tab3</li>
+            <li>tab4</li>
+        </ul>
+        <div class="right">
+            <div class="scroll">
+                <div class="tab_right">
+                    <div class="wrap">
+                        <h1></h1>
+                        <div class="items" id="Item9">
+                            <div class="itemCon">
+                                <style type="text/css">
+                                    .regionList {
+                                        float: left;
+                                        margin-top: 15px;
+                                    }
 
+                                    .regionList ul {
+                                        float: left;
+                                        width: 110px;
+                                        height: 100%;
+                                        margin-right: 5px;
+                                        display: inline;
+                                        font-family: "微软雅黑"
+                                    }
+
+                                    .regionList ul li {
+                                        height: 24px;
+                                        margin-left: 10px;
+                                        padding: 0 0px;
+                                        border: 1px solid #fff;
+                                        line-height: 24px;
+                                    }
+
+                                    .regionList ul li.select {
+                                        border: 1px solid #D3D3D3;
+                                        background: #FFF1BF
+                                    }
+
+                                    .mapInfo i {
+                                        display: inline-block;
+                                        width: 15px;
+                                        height: 15px;
+                                        margin-top: 5px;
+                                        line-height: 15px;
+                                        font-style: normal;
+                                        background: #aeaeae;
+                                        color: #fff;
+                                        font-size: 11px;
+                                        font-family: Tahoma;
+                                        -webkit-border-radius: 15px;
+                                        border-radius: 15px;
+                                        text-align: center
+                                    }
+
+                                    .mapInfo i.active {
+                                        background: #E27F21;
+                                    }
+
+                                    .mapInfo span {
+                                        padding: 0 5px 0 3px;
+                                    }
+
+                                    .mapInfo b {
+                                        font-weight: normal;
+                                        color: #2770B5
+                                    }
+
+                                    .regionMap {
+                                        float: left;
+                                        margin-left: 70px;
+                                        display: inline;
+                                    }
+                                </style>
+                                <div id="Region" style="position:relative; height:360px;">
+                                    <div class="regionMap" id="RegionMap"></div>
+                                    <div id="MapColor"
+                                         style=" display:none; float:left; width:30px; height:180px; margin:80px 0 0 50px; display:inline; background:url(images/map_color.png) center 0;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab_right">
+                    <img src="images/a2.png" alt="">
+                </div>
+                <div class="tab_right">
+                    <div id="container1" style="width: 100%;height:50%;"></div>
+                    <script>
+                        (function (b) {
+                            "object" === typeof module && module.exports ? module.exports = b : "function" === typeof define && define.amd ? define(function () {
+                                return b
+                            }) : b("undefined" !== typeof Highcharts ? Highcharts : void 0)
+                        })(function (b) {
+                            (function (a) {
+                                a.createElement("link", {
+                                    href: "https://fonts.googleapis.com/css?family\x3dSignika:400,700",
+                                    rel: "stylesheet",
+                                    type: "text/css"
+                                }, null, document.getElementsByTagName("head")[0]);
+                                a.wrap(a.Chart.prototype, "getContainer", function (a) {
+                                    a.call(this);
+                                    this.container.style.background = "url(https://www.highcharts.com/samples/graphics/sand.png)"
+                                });
+                                a.theme = {
+                                    colors: "#f45b5b #8085e9 #8d4654 #7798BF #aaeeee #ff0066 #eeaaee #55BF3B #DF5353 #7798BF #aaeeee".split(" "),
+                                    chart: {backgroundColor: null, style: {fontFamily: "Signika, serif"}},
+                                    title: {style: {color: "black", fontSize: "16px", fontWeight: "bold"}},
+                                    subtitle: {style: {color: "black"}},
+                                    tooltip: {borderWidth: 0},
+                                    legend: {itemStyle: {fontWeight: "bold", fontSize: "13px"}},
+                                    xAxis: {labels: {style: {color: "#6e6e70"}}},
+                                    yAxis: {labels: {style: {color: "#6e6e70"}}},
+                                    plotOptions: {
+                                        series: {shadow: !0}, candlestick: {lineColor: "#404048"},
+                                        map: {shadow: !1}
+                                    },
+                                    navigator: {xAxis: {gridLineColor: "#D0D0D8"}},
+                                    rangeSelector: {
+                                        buttonTheme: {
+                                            fill: "white",
+                                            stroke: "#C0C0C8",
+                                            "stroke-width": 1,
+                                            states: {select: {fill: "#D0D0D8"}}
+                                        }
+                                    },
+                                    scrollbar: {trackBorderColor: "#C0C0C8"},
+                                    background2: "#E0E0E8"
+                                };
+                                a.setOptions(a.theme)
+                            })(b)
+                        });
+                        // 图表配置
+                        var chart = Highcharts.chart('container1', {
+                            chart: {
+                                type: 'column'
+                            },
+                            title: {
+                                text: '全球各大城市人口排行'
+                            },
+                            subtitle: {
+                                text: '数据截止 2017-03，来源: <a href="https://en.wikipedia.org/wiki/List_of_cities_proper_by_population">Wikipedia</a>'
+                            },
+                            xAxis: {
+                                type: 'category',
+                                labels: {
+                                    rotation: -45  // 设置轴标签旋转角度
+                                }
+                            },
+                            yAxis: {
+                                min: 0,
+                                title: {
+                                    text: '人口 (百万)'
+                                }
+                            },
+                            legend: {
+                                enabled: false
+                            },
+                            tooltip: {
+                                pointFormat: '人口总量: <b>{point.y:.1f} 百万</b>'
+                            },
+                            series: [{
+                                name: '总人口',
+                                data: [
+                                    ['上海', 24.25],
+                                    ['卡拉奇', 23.50],
+                                    ['北京', 21.51],
+                                    ['德里', 16.78],
+                                    ['拉各斯', 16.06],
+                                    ['天津', 15.20],
+                                    ['伊斯坦布尔', 14.16],
+                                    ['东京', 13.51],
+                                    ['广州', 13.08],
+                                    ['孟买', 12.44],
+                                    ['莫斯科', 12.19],
+                                    ['圣保罗', 12.03],
+                                    ['深圳', 10.46],
+                                    ['雅加达', 10.07],
+                                    ['拉合尔', 10.05],
+                                    ['首尔', 9.99],
+                                    ['武汉', 9.78],
+                                    ['金沙萨', 9.73],
+                                    ['开罗', 9.27],
+                                    ['墨西哥', 8.87]
+                                ],
+                                dataLabels: {
+                                    enabled: true,
+                                    rotation: -90,
+                                    color: '#FFFFFF',
+                                    align: 'right',
+                                    format: '{point.y:.1f}', // :.1f 为保留 1 位小数
+                                    y: 10
+                                }
+                            }]
+                        });
+
+                    </script>
+                </div>
+                <div class="tab_right">
+                    <img src="images/a4.png" alt="">
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div>
-        <div>接口名：<button id="getShop" onclick="getShop()">getShop</button></div>
-
-    </div>
-
-    <div>result:</div>
-    <div id="resultObj"></div>
-    <div id="resultInf">111</div>
-    <script>
-        var addShop = function(){
-            var shop_id = document.getElementById("ShopId").value;
-            var shop_name = document.getElementById("ShopName").value;
-            var shop_type_name = document.getElementById("ShopTypeName").value;
-            var shop_intro = document.getElementById("ShopIntro").value;
-            var shop_image = document.getElementById("ShopImage").value;
-            axios.post('/api',{
-                    "apicode":"addShop",
-                    "args":{
-                        "shop_id":shop_id,
-                        "shop_name":shop_name,
-                        "shop_type_name":shop_type_name,
-                        "shop_intro":shop_intro,
-                        "shop_image":shop_image
-
-                }
-
-            }).then(function (response) {
-                $("#resultObj").html(JSON.stringify(response.data.obj));
-                $("#resultInf").html(response.data.msg.prompt);
-
-            }).catch(function (error) {
-                    console.log(error);
-                });
-        };
-        var getShops = function(){
-            axios.post('/api',{
-                "apicode":"getShops",
-                "args":{
-                }
-
-            }).then(function (response) {
-                $("#resultObj").html(JSON.stringify(response.data.obj));
-                $("#resultInf").html(response.data.msg.prompt);
-
-            }).catch(function (error) {
-                console.log(error);
-            });
-        }
-    </script>
-
+    <div class="clear"></div>
+</div>
+<script type="text/javascript" src="js/index.js"></script>
 </body>
 </html>
