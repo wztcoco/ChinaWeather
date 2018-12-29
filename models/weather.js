@@ -3,7 +3,7 @@
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('weather', {
     city: {
-      type: DataTypes.STRING(20),
+      type: DataTypes.STRING(10),
       allowNull: true
     },
     date: {
@@ -11,22 +11,16 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     max: {
-      type: DataTypes.STRING(10),
+      type: DataTypes.INTEGER(10),
       allowNull: true
     },
     min: {
-      type: DataTypes.STRING(10),
+      type: DataTypes.INTEGER(10),
       allowNull: true
     },
     kind: {
       type: DataTypes.STRING(20),
       allowNull: true
-    },
-    id: {
-      type: DataTypes.INTEGER(10),
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true
     }
   }, {
     tableName: 'weather',
