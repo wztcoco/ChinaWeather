@@ -1,4 +1,4 @@
-var sequelize = require('sequelize');
+ var sequelize = require('sequelize');
 var WeatherTable = require('../models/index').weather;
 var underscore = require('underscore');
 var API_RESULT_MODEL = {

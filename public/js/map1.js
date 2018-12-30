@@ -1,22 +1,11 @@
-/*!
- * SVG Map
- * @version v1.0.2
- * @author  Rocky(rockyuse@163.com)
- * @date    2014-01-16
- *
- * (c) 2012-2013 Rocky, http://rockydo.com
- * This is licensed under the GNU LGPL, version 2.1 or later.
- * For details, see: http://creativecommons.org/licenses/LGPL/2.1/
- */
-
 ;!function (win, $, undefined) {
-	var SVGMap = (function () {
-		function SVGMap(dom, options) {
+	var SVGMap1 = (function () {
+		function SVGMap1(dom, options) {
 			this.dom = dom;
 			this.setOptions(options);
 			this.render();
 		}
-		SVGMap.prototype.options = {
+		SVGMap1.prototype.options = {
 			mapName: 'china',
 			mapWidth: 500,
 			mapHeight: 400,
@@ -48,7 +37,7 @@
 			external: false
 		};
 
-		SVGMap.prototype.setOptions = function (options) {
+		SVGMap1.prototype.setOptions = function (options) {
 			if (options == null) {
 				options = null;
 			}
@@ -56,7 +45,7 @@
 			return this;
 		};
 
-		SVGMap.prototype.scaleRaphael = function (container, width, height) {
+		SVGMap1.prototype.scaleRaphael = function (container, width, height) {
 			var wrapper = document.getElementById(container);
 			if (!wrapper.style.position) wrapper.style.position = "relative";
 			wrapper.style.width = width + "px";
@@ -134,7 +123,7 @@
 			return paper;
 		};
 
-		SVGMap.prototype.render = function () {
+		SVGMap1.prototype.render = function () {
 			var opt = this.options,
 				_self = this.dom,
 				mapName = opt.mapName,
@@ -303,20 +292,20 @@
 				});
 			};
 		}
-		return SVGMap;
+		return SVGMap1;
 	})();
 
-	$.fn.SVGMap = function (opts) {
+	$.fn.SVGMap1 = function (opts) {
 		var $this = $(this),
 			data = $this.data();
 
-		if (data.SVGMap) {
-			delete data.SVGMap;
+		if (data.SVGMap1) {
+			delete data.SVGMap1;
 		}
 		if (opts !== false) {
-			data.SVGMap = new SVGMap($this, opts);
+			data.SVGMap1 = new SVGMap1($this, opts);
 		}
-		return data.SVGMap;
+		return data.SVGMap1;
 	};
 }(window, jQuery);
 $(function () {
@@ -376,7 +365,7 @@ $(function () {
 	var mapObj_1 = {};
 	var stateColorList = ['003399', '0058B0', '0071E1', '1C8DFF', '51A8FF', '82C0FF', 'AAD5ee', 'AAD5FF'];
 
-	$('#RegionMap').SVGMap({
+	$('#RegionMap1').SVGMap1({
 		external: mapObj_1,
 		mapName: 'china',
 		mapWidth: 750,
