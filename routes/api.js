@@ -135,9 +135,9 @@ module.exports = {
                 var min_temp = 100;
                 underscore.map(citys,function (item1) {
                     if(item1.min>max_temp)
-                        max_temp = item1.max;
+                        max_temp = item1.min;
                     if(item1.min<min_temp)
-                        min_temp = item1.max;
+                        min_temp = item1.min;
                 });
                 var temp = (max_temp-min_temp)/8;
                 for(i in data){
