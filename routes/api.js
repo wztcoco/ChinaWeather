@@ -176,7 +176,11 @@ module.exports = {
                     var ave_temp = 0;
                     var length = 0;
                     underscore.map(each_city,function (item2) {
-                        ave_temp+=item2.max;
+                        var dataT = 0;
+                        dataT+=item2.max;
+                        dataT+=item2.min;
+                        dataT/=2;
+                        ave_temp+=dataT;
                         length++;
                     });
                     ave_temp/=length;
@@ -206,7 +210,11 @@ module.exports = {
                     var ave_temp = 0;
                     var length = 0;
                     underscore.map(each_city,function (item2) {
-                        ave_temp+=item2.min;
+                        var dataT = 0;
+                        dataT+=item2.max;
+                        dataT+=item2.min;
+                        dataT/=2;
+                        ave_temp+=dataT;
                         length++;
                     });
                     ave_temp/=length;
@@ -215,7 +223,7 @@ module.exports = {
                     maps.push(each_temp);
                 }
                 maps.sort(function(x, y){
-                    return y[1]-x[1];
+                    return x[1]-y[1];
                 });
 
                 res.send(maps.slice(0,10));
