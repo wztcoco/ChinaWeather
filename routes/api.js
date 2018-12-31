@@ -150,7 +150,7 @@ module.exports = {
                     });
                     ave_temp/=length;
                     var j = -1;
-                    data[i].value = ave_temp.toFixed(1)+"";
+                    data[i].value = ave_temp.toFixed(1);
                     while(ave_temp>=min_temp)
                     {
                         ave_temp-=temp;

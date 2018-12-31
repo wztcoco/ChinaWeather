@@ -1,6 +1,5 @@
 $('.tab .menus li').each(function(){
     $('.tab .menus li').click(function(){
-        console.log(111);
         $('.tab .menus li').removeClass('bg');
         $(this).addClass('bg');
         var index = $(this).index();
