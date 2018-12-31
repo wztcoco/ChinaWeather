@@ -256,10 +256,14 @@ module.exports = {
                 var citys = underscore.pluck(result,"dataValues");
                 var kinds = underscore.pluck(citys,"kind");
                 var kindArray = underscore.unique(kinds);
-                var resultObj = {};
+                var resultObj =[];
                 for(var i=0;i<kindArray.length;i++) {
+                    var dataa={};
                     var cityList = underscore.pluck(underscore.where(citys,{kind:kindArray[i]}),"city");
-                    resultObj[kindArray[i]] = cityList;
+                    dataa.name = kindArray[i];
+                    var xxx = cityList.length/citys.length;
+                    dataa.y =  parseInt(100*xxx.toFixed(2));
+                    resultObj.push(dataa);
                 }
                 res.send(resultObj);
             }
