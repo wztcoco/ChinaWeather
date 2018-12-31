@@ -184,8 +184,11 @@ module.exports = {
                     each_temp.push(names[i],parseInt(10*ave_temp.toFixed(1))/10);
                     maps.push(each_temp);
                 }
+                maps.sort(function(x, y){
+                    return y[1]-x[1];
+                });
 
-                res.send(maps);
+                res.send(maps.slice(0,10));
             }
         }).catch(function (error) {
             console.log(error);
@@ -211,8 +214,11 @@ module.exports = {
                     each_temp.push(names[i],parseInt(10*ave_temp.toFixed(1))/10);
                     maps.push(each_temp);
                 }
+                maps.sort(function(x, y){
+                    return y[1]-x[1];
+                });
 
-                res.send(maps);
+                res.send(maps.slice(0,10));
             }
         }).catch(function (error) {
             console.log(error);
