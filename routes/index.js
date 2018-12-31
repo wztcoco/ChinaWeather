@@ -22,6 +22,9 @@ router.get('/getTempMaxMap',function (req, res, next) {
 router.get('/getTempMinMap',function (req, res, next) {
   apis.getTempMinMap(req, res);
 });
+router.get('/getTempMinSort',function (req, res, next) {
+  apis.getTempMinSort(req, res);
+});
 router.get('/getTempMaxSort',function (req, res, next) {
   apis.getTempMaxSort(req, res);
 });

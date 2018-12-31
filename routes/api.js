@@ -111,12 +111,12 @@ module.exports = {
                     });
                     ave_temp/=length;
                     var j = -1;
+                    data[i].value = ave_temp.toFixed(1)+"";
                     while(ave_temp>=min_temp)
                     {
                         ave_temp-=temp;
                         j++;
                     }
-                    data[i].value = ave_temp+"";
                     data[i].stateInitColor = j+"";
                 }
                 res.send(data);
@@ -150,12 +150,12 @@ module.exports = {
                     });
                     ave_temp/=length;
                     var j = -1;
+                    data[i].value = ave_temp.toFixed(1)+"";
                     while(ave_temp>=min_temp)
                     {
                         ave_temp-=temp;
                         j++;
                     }
-                    data[i].value = ave_temp+"";
                     data[i].stateInitColor = j+"";
                 }
                 res.send(data);
@@ -176,12 +176,39 @@ module.exports = {
                     var ave_temp = 0;
                     var length = 0;
                     underscore.map(each_city,function (item2) {
+                        ave_temp+=item2.max;
+                        length++;
+                    });
+                    ave_temp/=length;
+                    var each_temp = [];
+                    each_temp.push(names[i],parseInt(10*ave_temp.toFixed(1))/10);
+                    maps.push(each_temp);
+                }
+
+                res.send(maps);
+            }
+        }).catch(function (error) {
+            console.log(error);
+        })
+    },
+    getTempMinSort:function (params, res) {
+        WeatherTable.findAll({
+            attributes:["city","date","max","min","kind"]
+        }).then(function (result) {
+            if(result){
+                var citys = underscore.pluck(result,"dataValues");
+                var maps = [];
+                for(i in data){
+                    var each_city = underscore.where(citys,{city:names[i]});
+                    var ave_temp = 0;
+                    var length = 0;
+                    underscore.map(each_city,function (item2) {
                         ave_temp+=item2.min;
                         length++;
                     });
                     ave_temp/=length;
                     var each_temp = [];
-                    each_temp.push(names[i],ave_temp);
+                    each_temp.push(names[i],parseInt(10*ave_temp.toFixed(1))/10);
                     maps.push(each_temp);
                 }
 
